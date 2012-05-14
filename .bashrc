@@ -40,3 +40,8 @@ export MAVEN_OPTS=-Xmx1g
 export PYTHONPATH=$HOME/Document/Drexel/year5/asna/pyfacebook
 export SVN_EDITOR=vim
 export STACK=dev-mel
+if [ -f bash_custom ]; then
+ . bash_custom
+fiif [ -f /Users/melissaaaron/Source/mynameisfiber-Shell-Config-cbe20ab/bash_custom ]; then
+  . /Users/melissaaaron/Source/mynameisfiber-Shell-Config-cbe20ab/bash_custom 
+fi

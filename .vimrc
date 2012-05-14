@@ -1,149 +1,162 @@
-" $Id: dot.vimrc,v 1.1 2004/05/10 19:10:50 ali Exp $
-"
-" My lovely vimrc file
-"
+"Run pathogen
+call pathogen#infect()
 
-" Sorry Ali, I hijacked this file and plan on making it UGLY!! ;)
-abbr teh the
-abbr tehy they
-abbr cahr char
-abbr itn int
-abbr prnitf printf
-abbr pritnf printf
-abbr fprnitf fprintf
-abbr fpritnf fprintf
-abbr strign string
-abbr nmae name
-abbr ls ls -F
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+set rtp+=/usr/local/go/misc/vim
 
-" add Autocomplete for python
-if has("autocmd")
-    autocmd FileType python set complete+=k/User/BuggsBunny/.vim/dic/pydiction-0.5 isk+=.,(
-endif " has("autocmd")
+syntax on
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-"set bs=2
-" set Spell checking
-autocmd BufNewFile,BufRead *.txt,*.htm,*.html,README,*.tex set spell
-set viminfo='20,\"50
-set history=50		" keep 50 lines of history
-set ruler		" display cursor position in lower right
-set so=2		" show at lease 2 lines around the cursor
-set showmatch		" show match on brackets
-set showcmd		" display incomplete commands
-set nohlsearch		" do not highlight my search text
-set incsearch		" do incremental searching
-set nojs		" use only 1 space after '.' when joining a line
-set ignorecase
-set smartcase
-"#set foldmethod=indent
+" New leader
+let mapleader=","
 
-if exists("&matchtime")
-  set matchtime=2	" for 2/10 of a second
-endif
-if exists("&nf")
-  set nf=hex		" do not use octal numbers in CTRL-A and CTRL-X
-endif
+" Yank, comment, paste.
+nmap <leader>y yy,c<space>p
+vmap <leader>y yygv,c<space>p
 
-" By default use soft-tabstops of width 4 -- this applies
-" to all files
-"set sts=4
+" Get rid of the topbar on gui mode
+"set guioptions-=T
+set guioptions-=T
+
+syntax enable
+set background=dark
+" colorscheme solarized
+" Solarized background strangeness fix
+highlight Normal ctermbg=none
+
+"Set linenumber stuff
+set numberwidth=3
+" set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+highlight LineNr ctermbg=darkgrey
+
+"Set reasonable colors for pyflakes highlighting
+hi SpellBad cterm=underline ctermbg=0
+
+filetype on
+filetype plugin on
+filetype plugin indent on
+
+"Allow moving to the end of the line in visual block mode
+ set virtualedit+=block
+
+"Highlight search results
+set hlsearch
+
+"tabs
+set softtabstop=4
+set shiftwidth=4
 set expandtab
-set ts=4
-set sw=4
+set tabstop=4
+set smarttab
+set smartindent
+set autoindent
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-map 0x42 = <Esc>
-if has("gui_running")
-  " GUI specific commands
-  set background=dark
-  set mousehide
-  " These can affect the parent x-term. Turn them off by default
-  "set columns=80
-  "set lines=55
-  " set the X11 font to use
-  " set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
-  " set guifont=-*-fixed-*-*-*-*-20-*-*-100-*-*-*-1
-  set guifont=-misc-fixed-medium-*-normal-*-15-*-100-100-c-*-*-*
-  syntax on
-elseif &t_Co > 2
-  " Color terminal
-  syntax on
-  highlight Comment ctermfg=DarkCyan
-endif
+"Search config
+set ignorecase
+set incsearch
 
+"Omni completion
+:filetype on
+:filetype plugin on
+set nocp
 
 if has("autocmd")
+  autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+  autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
+endif
+:inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
+:inoremap <buffer> <C-S-Space> <C-X><C-O>
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+"Leave insert mode with `jk` (avoid escape!)
+imap jk <Esc>
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+" unmap arrow keys
+nmap <right> <nop>
+nmap <left> <nop>
+nmap <up> <nop>
+nmap <down> <nop>
+imap <right> <nop>
+imap <left> <nop>
+imap <up> <nop>
+imap <down> <nop>
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+"http://vim.wikia.com/wiki/VimTip1608
+set tags+=~/.vim/tags/alltags
+" build tags of your own project with Ctrl-F12
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  
-  "autocmd BufReadPost *
-  "  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  "  \   exe "normal g`\"" |
-  "  \ endif
+"Reload all buffers with F4
+nmap <F4> :bufdo e!<CR>
 
-  augroup END
+" Opens tagbar with F2
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+map <F2> :TagbarToggle<CR>
 
+" Open NERDTree with F3
+map <F3> :NERDTreeToggle<CR>
 
-  " HTML (.template)
-  au BufNewFile,BufRead *.template setf awshtml
+" Open GunDo with F5
+map <F5> :GundoToggle<CR>
 
-else
+"Window Resizing
+map <C-h> <C-w>>
+map <C-j> <C-W>-
+map <C-k> <C-W>+
+map <C-l> <C-w><
 
-  set autoindent		" always set autoindenting on
+"Tab Movement and creation
+:map <C-S-tab> :tabprevious<CR>
+:map <C-tab> :tabnext<CR>
+:imap <C-S-tab> <Esc>:tabprevious<CR>i
+:imap <C-tab> <Esc>:tabnext<CR>i
+:nmap <C-S-t> :tabnew<CR>
+:imap <C-S-t> <Esc>:tabnew<CR>
 
-endif " has("autocmd")
+"Tabline
+if exists("+guioptions") 
+     set go-=e 
+endif 
+if exists("+showtabline") 
+     function MyTabLine() 
+         let s = '' 
+         let t = tabpagenr() 
+         let i = 1 
+         while i <= tabpagenr('$') 
+             let buflist = tabpagebuflist(i) 
+             let winnr = tabpagewinnr(i) 
+             let s .= ' %' . i . 'T' 
+             let s .= (i == t ? '%1*[' : '%2*%#TabLineFill#(') 
+             let s .= i  
 
-  
-" Use the filename as the icon title
-set icon
+             let modified = 0
+             for curbuf in buflist
+               let modified += getbufvar(curbuf, "&modified")
+             endfor
+             if modified > 0
+               let s .= '*'
+             else
+               let s .= '-'
+             endif
 
-" Save modified files when doing a make
-set autowrite
-
-" Make shift-insert work like in Xterm
-map <S-Insert> <MiddleMouse>
-map! <S-Insert> <MiddleMouse>
-
-" Fix mapping
-map!  
-
-" Set nice colors
-"color midnight
-"color desert
-"color fog
-"color borland
-"color oceandeep
-"color shine
-"color evening
-"color darkblue was nice until code folding
-"color colorer
-color delek
-"color morning
-"color elflord
-"
-" Disable auto spell check..
-let spell_auto_type = "thisftdoesntexist"
-
-"put search highlighting on
-"set hlsearch
+             let s .= '%*' 
+             let s .= (i == t ? '%#TabLineSel#' : '') 
+             let file = bufname(buflist[winnr - 1]) 
+             let file = fnamemodify(file, ':p:.:t') 
+             if file == '' 
+                 let file = '[No Name]' 
+             endif 
+             let s .= file 
+             if tabpagewinnr(i,'$') > 1
+               let s .= '/' . tabpagewinnr(i,'$')
+             endif
+             let s .= (i == t ? '%#TabLineFill#]' : ')') 
+             let s .= ' '
+             let i = i + 1 
+         endwhile 
+         let s .= '%T%#TabLineFill#%=' 
+         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X') 
+         return s 
+     endfunction 
+     set stal=2 
+     set tabline=%!MyTabLine() 
+endif
