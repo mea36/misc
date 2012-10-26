@@ -33,7 +33,7 @@ export PS1="\u@\h \W $ "
 
 #env variables?
 #PATH=$PATH:/Users/melissaaaron/Documents/Drexel/543/mips-dec-ultrix4.2/:/usr/local/apache-maven-2.2.0/bin:/opt/subversion/bin:/Users/melissaaaron/Documents/Drexel/year5/cs675/rse/lab4/src:/Users/melissaaaron/Document/Drexel/year5/winter10/asna/pyfacebook/bin:/usr/local/mysql/bin:/Applications/Django-1.1.1/django:/Library/PostgreSQL/9.1/bin; export PATH
-PATH=$PATH:/usr/local/apache-maven-2.2.0/bin:/opt/subversion/bin:/usr/local/mysql/bin:/Applications/Django-1.1.1/django:/Library/PostgreSQL/9.1/bin; export PATH
+PATH=$PATH:/usr/local/apache-maven-2.2.0/bin:/opt/subversion/bin:/usr/local/mysql/bin:/Applications/Django-1.1.1/django:/Library/PostgreSQL/9.1/bin:/Source/android-sdk-macosx/tools; export PATH
 export ARCHDIR=/Users/melissaaaron/Documents/Drexel/543/mips-dec-ultrix4.2
 export JAVA_HOME=/Library/Java/Home;
 export MAVEN_OPTS=-Xmx1g

@@ -1,6 +1,6 @@
 "Run pathogen
 call pathogen#infect()
-
+        
 set rtp+=/usr/local/go/misc/vim
 
 syntax on
@@ -14,7 +14,7 @@ vmap <leader>y yygv,c<space>p
 
 " Get rid of the topbar on gui mode
 "set guioptions-=T
-set guioptions-=T
+"set guioptions-=T
 
 syntax enable
 set background=dark
@@ -23,10 +23,10 @@ set background=dark
 highlight Normal ctermbg=none
 
 "Set linenumber stuff
-set numberwidth=3
+"set numberwidth=3
 " set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 highlight LineNr ctermbg=darkgrey
 
 "Set reasonable colors for pyflakes highlighting
@@ -38,27 +38,35 @@ filetype plugin indent on
 
 "Allow moving to the end of the line in visual block mode
  set virtualedit+=block
-
-"Highlight search results
-set hlsearch
-
 "tabs
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set tabstop=4
 set smarttab
-set smartindent
+"set smartindent
 set autoindent
 
 "Search config
 set ignorecase
 set incsearch
+set nohlsearch    " do not highlight my search text
+set ignorecase
+set smartcase
+
+"misc
+set history=50    " keep 50 lines of history
+set ruler    " display cursor position in lower right
+set so=2    " show at lease 2 lines around the cursor
+set showmatch    " show match on brackets
+set showcmd    " display incomplete commands
 
 "Omni completion
 :filetype on
 :filetype plugin on
 set nocp
+
+au BufReadPost *.scss set syntax=css
 
 if has("autocmd")
   autocmd Filetype java setlocal omnifunc=javacomplete#Complete
@@ -70,15 +78,18 @@ endif
 "Leave insert mode with `jk` (avoid escape!)
 imap jk <Esc>
 
+"open file in new tab (similar to gf) with `gf` 
+map gf <C-w>gf
+
 " unmap arrow keys
-nmap <right> <nop>
-nmap <left> <nop>
-nmap <up> <nop>
-nmap <down> <nop>
-imap <right> <nop>
-imap <left> <nop>
-imap <up> <nop>
-imap <down> <nop>
+"nmap <right> <nop>
+"nmap <left> <nop>
+"nmap <up> <nop>
+"nmap <down> <nop>
+"imap <right> <nop>
+"imap <left> <nop>
+"imap <up> <nop>
+"imap <down> <nop>
 
 "http://vim.wikia.com/wiki/VimTip1608
 set tags+=~/.vim/tags/alltags
@@ -157,6 +168,6 @@ if exists("+showtabline")
          let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X') 
          return s 
      endfunction 
-     set stal=2 
+     set stal=1 
      set tabline=%!MyTabLine() 
 endif
