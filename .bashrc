@@ -29,17 +29,18 @@ alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 
 # set prompt, though maybe already done in /etc/bashrc
 #		see man or info pages for special characters (\u, etc.)
-export PS1="\u@\h \W $ "
+#export PS1="\u@\h \W $ "
+export PS1="\W $ "
 
-#env variables?
-#PATH=$PATH:/Users/melissaaaron/Documents/Drexel/543/mips-dec-ultrix4.2/:/usr/local/apache-maven-2.2.0/bin:/opt/subversion/bin:/Users/melissaaaron/Documents/Drexel/year5/cs675/rse/lab4/src:/Users/melissaaaron/Document/Drexel/year5/winter10/asna/pyfacebook/bin:/usr/local/mysql/bin:/Applications/Django-1.1.1/django:/Library/PostgreSQL/9.1/bin; export PATH
-PATH=$PATH:/usr/local/apache-maven-2.2.0/bin:/opt/subversion/bin:/usr/local/mysql/bin:/Applications/Django-1.1.1/django:/Library/PostgreSQL/9.1/bin; export PATH
-export ARCHDIR=/Users/melissaaaron/Documents/Drexel/543/mips-dec-ultrix4.2
-export JAVA_HOME=/Library/Java/Home;
-export MAVEN_OPTS=-Xmx1g
-export PYTHONPATH=$HOME/Document/Drexel/year5/asna/pyfacebook
+#env variables
+export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+export PYTHONPATH='/usr/bin/python'
 export SVN_EDITOR=vim
 export STACK=dev-mel
+export WORKON_HOME=~/envs
 if [ -f bash_custom ]; then
  . bash_custom
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
