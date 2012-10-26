@@ -74,3 +74,6 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/2.6/bin:${PATH}"
 export PATH
+if [ -f /Users/melissaaaron/Source/mynameisfiber-Shell-Config-cbe20ab/bash_custom ]; then
+  . /Users/melissaaaron/Source/mynameisfiber-Shell-Config-cbe20ab/bash_custom 
+fi

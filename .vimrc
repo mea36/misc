@@ -22,12 +22,13 @@ set background=dark
 " Solarized background strangeness fix
 highlight Normal ctermbg=none
 
+
 "Set linenumber stuff
-set numberwidth=3
+"set numberwidth=3
 " set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-highlight LineNr ctermbg=darkgrey
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
+"highlight LineNr ctermbg=darkgrey
 
 "Set reasonable colors for pyflakes highlighting
 hi SpellBad cterm=underline ctermbg=0

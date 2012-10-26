@@ -36,7 +36,7 @@ export PS1="\W $ "
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 export PYTHONPATH='/usr/bin/python'
 export SVN_EDITOR=vim
-export STACK=dev-mel
+export STACK=dev
 export WORKON_HOME=~/envs
 if [ -f bash_custom ]; then
  . bash_custom
