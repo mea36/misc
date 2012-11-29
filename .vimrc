@@ -171,3 +171,12 @@ if exists("+showtabline")
      set stal=1 
      set tabline=%!MyTabLine() 
 endif
+
+
+fun! GrepWord()
+    let s:term = expand('<cword>')
+    :exe ":!grep -r " . s:term . " *"
+endfun
+
+map sear :call GrepWord()<CR>
+
