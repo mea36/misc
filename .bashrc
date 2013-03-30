@@ -19,6 +19,7 @@ if [[ `uname -s` = "Linux" ]] ; then
 	alias ls="ls --color=auto"
 fi
 alias ls="ls -G"
+export LSCOLORS=fxfxcxdxbxegedabagacad #changed dir color from blue to magenta `man ls` for details
 alias r="fc -s"
 alias h="history"
 alias mysql=/usr/local/mysql/bin/mysql
